@@ -1,36 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Timer</title>
-    <link rel="stylesheet" href="style.css">
-   
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Timer</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+  input {
+    width: 50px;
+    text-align: center;
+  }
+</style>
 </head>
 <body>
-    <div id="container">
-        <h1>Timer</h1>
-        <div class="num">
-            <h1 id="hr">00</h1>
-            <h1>:</h1>
-            <h1 id="min">00</h1>
-            <h1>:</h1>
-            <h1 id="sec">00</h1>
-            <h1>:</h1>
-            <h1 id="milli">00</h1>
-           
-            
-        </div>
-        <div class="btn">
-              <button onclick= "Start()">Start</button>
-              <button onclick= "Stop()">Stop</button>
-              <button onclick= "Reset()">Reset</button>
-        </div>
-
-    </div>
+  <h1>Timer</h1>
+  <div>
+    <input id="hours" type="number" min="0" placeholder="00"> :
+    <input id="minutes" type="number" min="0" max="59" placeholder="00"> :
+    <input id="seconds" type="number" min="0" max="59" placeholder="00">
+  </div>
+  <br>
+  <button onclick="startTimer()">Start</button>
+  <button onclick="pauseTimer()">Pause</button>
+  <button onclick="resetTimer()">Reset</button>
+  
+  <script>
+    let timer;
+    let hoursInput = document.getElementById('hours');
+    let minutesInput = document.getElementById('minutes');
+    let secondsInput = document.getElementById('seconds');
+    
+    function startTimer() {
+      let hours = parseInt(hoursInput.value) || 0;
+      let minutes = parseInt(minutesInput.value) || 0;
+      let seconds = parseInt(secondsInput.value) || 0;
+      
+      let totalSeconds = hours * 3600 + minutes * 60 + seconds;
+      
+      timer = setInterval(() => {
+        if (totalSeconds <= 0) {
+          clearInterval(timer);
+          alert("Time's up!");
+        } else {
+          totalSeconds--;
+          hours = Math.floor(totalSeconds / 3600);
+          minutes = Math.floor((totalSeconds % 3600) / 60);
+          seconds = totalSeconds % 60;
+          
+          hoursInput.value = String(hours).padStart(2, '0');
+          minutesInput.value = String(minutes).padStart(2, '0');
+          secondsInput.value = String(seconds).padStart(2, '0');
+        }
+      }, 1000);
+    }
+    
+    function pauseTimer() {
+      clearInterval(timer);
+    }
+    
+    function resetTimer() {
+      clearInterval(timer);
+      hoursInput.value = '00';
+      minutesInput.value = '00';
+      secondsInput.value = '00';
+    }
+  </script>
 </body>
 </html>
-<script src="script.js">
-
-
-</script>
