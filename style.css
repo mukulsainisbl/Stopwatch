@@ -1,0 +1,25 @@
+body{
+    background-color:grey;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+#container{
+    border: 2px solid red;
+    text-align: center;
+    background-color: white;
+    width: 40%;
+    margin: auto;
+    margin-top:30vh;
+    padding: 10px;
+
+}
+
+#container > h1{
+    color: blue;
+
+}
+.num{
+    display:flex;
+    justify-content: center;
+    gap: 10px;
+
+}
